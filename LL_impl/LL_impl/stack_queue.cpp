@@ -20,6 +20,57 @@ struct Node {
     };
 };
 
+template <class T>
+struct LinkedList {
+    Node<T>* head;
+    LinkedList(){
+        this->head = NULL;
+    }
+    
+    void insertNode(T& data) {
+        Node<T>* node = new Node(data);
+        if (head == NULL){
+            head = node;
+        } else {
+            Node<T>* temp = head;
+            while (temp->next != NULL) {
+                temp = temp->next;
+            }
+            temp->next = node;
+        }
+    }
+    
+    void reverse() {
+        if (head == NULL){
+            return;
+        } else {
+            Node<T>* prev = NULL;
+            while (head->next != NULL){
+                Node<T>* temp = head->next;
+                head->next = prev;
+                prev = head;
+                head = temp;
+            }
+            head->next = prev;
+        }
+    }
+
+    void print() {
+        std::cout << "LL: ";
+        if (head == NULL){
+            std::cout << "Empty\n";
+            return;
+        }
+        Node<T>* node = head;
+        while (node->next != NULL) {
+            std::cout << node->data << "->";
+            node = node->next;
+        }
+        std::cout << node->data
+                  << "\n" ;
+    }
+    
+};
 
 template <class T>
 struct Queue {
